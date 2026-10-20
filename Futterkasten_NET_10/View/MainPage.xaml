@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Futterkasten.MainPage" 
+             xmlns:local="clr-namespace:Futterkasten"
+             xmlns:vm="clr-namespace:Futterkasten.ViewModel"
+             x:DataType="vm:MainPageViewModel"
+             Title="Futterkasten">
+  
+    <ScrollView> 
+            <StackLayout Spacing="10" Padding="5">
+            <Label Text="{Binding LblHauptAnzeige.Text}"  FontSize="50" HorizontalOptions="Center"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" BackgroundColor="{Binding Horizontal_BackgroundColor}" Padding="20">
+                <HorizontalStackLayout.Shadow>
+                    <Shadow Brush="DarkGray" Offset="10,10" Radius="10"/>
+                </HorizontalStackLayout.Shadow>
+                    
+                
+                        <CheckBox IsChecked="{Binding CbIsChecked_MagRene}" />
+                        <Label Text="Mag René" VerticalOptions="Center" />
+                        <CheckBox IsChecked="{Binding CbIsChecked_MagJessy}"  HorizontalOptions="End"/>
+                        <Label Text="Mag Jessy" VerticalOptions="Center" />
+                        <CheckBox IsChecked="{Binding CbIsChecked_IstAufwendig}" />
+                        <Label Text="Ist Aufwendig" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                
+                <Button Command="{Binding NextAdviceCommand}" Text="Nächster Vorschlag">
+                    <Button.Shadow>
+                        <Shadow Brush="DarkGray" Radius="10" Offset="10,10" />
+                    </Button.Shadow>
+                </Button>
+            <Button Command="{Binding AuswählenCommand}" Text="Auswählen">
+                <Button.Shadow>
+                    <Shadow Brush="DarkGray" Radius="10" Offset="10,10" />
+                </Button.Shadow>
+            </Button>
+            <Label Text="{Binding LblIgnorList.Text}" FontAttributes="Bold"/>
+            <Label Text="{Binding LblEssensliste.Text}" FontAttributes="Bold"/>
+            <Label Text="{Binding LblTimeStamp.Text}" />
+            <Label Text="{Binding IntFilteredListeCount}"/>
+            </StackLayout>
+        </ScrollView>
+    
+</ContentPage>

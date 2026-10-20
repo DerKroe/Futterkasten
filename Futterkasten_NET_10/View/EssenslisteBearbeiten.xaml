@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Futterkasten.EssenslisteBearbeiten"
+             xmlns:local="clr-namespace:Futterkasten_NET_10"
+             xmlns:vm="clr-namespace:Futterkasten.ViewModel"
+             xmlns:models="clr-namespace:Futterkasten.Model"
+             Title="Einträge Bearbeiten">
+
+    <ContentPage.BindingContext>
+        <vm:EssenBearbeitenViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ScrollView>
+            <VerticalStackLayout>
+                <VerticalStackLayout BackgroundColor="AliceBlue" WidthRequest="500">
+                    <Label Text="Essenswunsch eingeben:" FontSize="Medium" HorizontalOptions="Center"/>
+                    <Editor Text="{Binding HinzufügenInput}"
+                            FontSize="Body" 
+                            BackgroundColor="AliceBlue"  
+                            WidthRequest="340"/>
+                    <Label Text="Mag Jessy" HorizontalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding MagJessy}" HorizontalOptions="Center"/>
+                    <Label Text="Mag Rene" HorizontalOptions="Center" />
+                    <CheckBox IsChecked="{Binding MagRene}"  HorizontalOptions="Center"/>
+                    <Label Text="Ist Aufwändig" HorizontalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding IstAufwändig}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <Button Text="Hinzufügen" Command="{Binding HinzufügenCommand}" IsEnabled="{Binding HinzufügenButtonIsEnabled}" HeightRequest="40" WidthRequest="340"/>
+                <Label Text="{Binding EssenAktuellLocal.Count}" HorizontalOptions="Center"/>
+
+                <CollectionView ItemsSource="{Binding EssenAktuellLocal}" SelectionMode="Single" SelectedItem="{Binding CollectionViewSelectedItem}" SelectionChangedCommand="{Binding CollectionViewSelectionChangedCommand}"  Margin="10" WidthRequest="340">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Essen">
+                            <VerticalStackLayout Padding="2" WidthRequest="340">
+                                <Border StrokeThickness="1" Stroke="Black" Padding="20">
+                                    <VerticalStackLayout BackgroundColor="LightGray">
+                                        <Label Padding="3">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Name: "/>
+                                                    <Span Text="{Binding Name}" TextColor="Red" FontSize="15" FontAttributes="Bold" />
+                                                    <Span Text="  Mag Jessy: " />
+                                                    <Span Text="{Binding MagJessy}" TextColor="Red" FontSize="15" FontAttributes="Bold" />
+                                                    <Span Text="  Mag Rene: " />
+                                                    <Span Text="{Binding MagRene}" TextColor="Red" FontSize="15" FontAttributes="Bold" />
+                                                    <Span Text="  Ist Aufwändig: " />
+                                                    <Span Text="{Binding IsAufwändig}" TextColor="Red" FontSize="15" FontAttributes="Bold" />
+                                            </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
